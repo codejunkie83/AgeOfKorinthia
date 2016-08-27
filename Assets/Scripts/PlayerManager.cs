@@ -6,7 +6,6 @@ public class PlayerManager : MonoBehaviour {
     int health = 100;
     public Slider healthBar;
     NavMeshAgent agent;
-    public GameObject Projectile;
 
 	// Use this for initialization
 	void Start ()
@@ -24,16 +23,7 @@ public class PlayerManager : MonoBehaviour {
 
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
             {
-                if (hit.transform.tag == "Enemy")
-                {
-                    transform.LookAt(hit.transform);
-                    GameObject fireball = Instantiate(Projectile, transform.position, transform.rotation) as GameObject;
-                    fireball.GetComponent<Rigidbody>().velocity = (hit.transform.position - transform.position).normalized * 10;
-                }
-                else
-                {
-                    agent.destination = hit.point;
-                }
+                agent.destination = hit.point;
             }
         }
     }
